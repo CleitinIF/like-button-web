@@ -1,50 +1,35 @@
-import React, { Component } from "react"
+import React, { Component, useEffect, useState } from "react"
 import logo from "./logo.svg"
 import "./App.css"
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
+const App = () => {
+  const [post, setPost] = useState();
 
-  handleClick = api => e => {
-    e.preventDefault()
-
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
+  const fetchPost = async () => {
+    fetch("/.netlify/functions/getPost")
       .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
+      .then(json => setPost(json))
   }
 
-  render() {
-    const { loading, msg } = this.state
+  useEffect(() => {
+    fetchPost();
+  }, [])
 
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
+  const handleLikeClick = (state) => {
+    fetch("/.netlify/functions/" + state)
+      .then(response => response.json())
+      .then(json => setPost(prev => ({
+        ...prev,
+        likes: json.likes
+      })))
   }
-}
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
+  return (
+    <div className="App">
+      <p>Artigo: {post?.likes} likes</p>
+      <button onClick={() => handleLikeClick('like')}>Like</button>
+    </div>
+  )
 }
 
 export default App
