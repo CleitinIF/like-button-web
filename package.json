@@ -16,7 +16,8 @@
     "build:app": "react-scripts build",
     "build:lambda": "netlify-lambda build src/lambda",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "setup-database": "node ./scripts/setup-fauna-database.js"
   },
   "eslintConfig": {
     "extends": "react-app"
