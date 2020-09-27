@@ -62,7 +62,7 @@ const App = () => {
       ) : (
         <>
           <div className="content">
-            <p>Post {post.name}</p>
+            <p>{post.name}</p>
             <button onClick={() => handleLikeClick('like')}>
               <img ref={imageRef} src={require(`./assets/${likesSent ? 'filled-clap.png' : 'clap.png'}`)} alt="Clap button" />
             </button>
