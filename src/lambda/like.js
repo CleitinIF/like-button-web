@@ -13,10 +13,6 @@ exports.handler = async (event, context) => {
   if(!id) {
     return {
       statusCode: 400,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://zen-goodall-21fbd0.netlify.app/',
-        'Access-Control-Allow-Credentials': true,
-      },
       body: JSON.stringify({message: 'You need to send the post id in url'})
     }
   }
@@ -56,10 +52,6 @@ exports.handler = async (event, context) => {
   
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://zen-goodall-21fbd0.netlify.app/',
-        'Access-Control-Allow-Credentials': true,
-      },
       body: JSON.stringify({likes: data.likes})
     }
   } catch (error) {
@@ -67,10 +59,6 @@ exports.handler = async (event, context) => {
 
     return {
       statusCode: 400,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://zen-goodall-21fbd0.netlify.app/',
-        'Access-Control-Allow-Credentials': true,
-      },
       body: JSON.stringify({message: 'Internal error'})
     }
   }

@@ -16,6 +16,8 @@ const App = () => {
       .then(json => {
         setPost(json)
         setLoading(false)
+      }).catch(() => {
+        window.alert('An error occurred while making the request')
       })
   }
 
@@ -44,6 +46,7 @@ const App = () => {
     }))
     fetch("/.netlify/functions/like/1")
       .catch(() => {
+        window.alert('An error occurred while making the request')
         setLikesSent(prev => prev-1);
         setPost(prev => ({
           ...prev,
