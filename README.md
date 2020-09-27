@@ -1,5 +1,13 @@
 # Serverless like button
 
+## Observations
+
+  - Why I choose FaunaDB instead a key-value database to store likes?
+
+    Because I also think in the context of the articles, to be able to store title, description, etc.
+
+  - I was unable to configure the CORS for serverless functions
+
 ## Run yourself
 
 1. Clone down the repository
