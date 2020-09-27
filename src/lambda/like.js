@@ -55,6 +55,8 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({likes: data.likes})
     }
   } catch (error) {
+    console.log(error)
+
     return {
       statusCode: 400,
       body: JSON.stringify({message: 'Internal error'})

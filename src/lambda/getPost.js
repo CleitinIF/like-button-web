@@ -32,6 +32,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify(response)
     }
   } catch (error) {
+    console.log(error)
     return {
       statusCode: 400,
       body: JSON.stringify({message: 'Internal error'})
