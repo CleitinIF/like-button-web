@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { api } from "./services/api";
 import "./App.css";
 
 const App = () => {
@@ -11,20 +12,13 @@ const App = () => {
   const fetchPost = async () => {
     setLoading(true);
 
-    fetch(`${process.env.REACT_APP_API_URL}/getpost/1`, {
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((json) => {
-        setPost(json);
-        setLoading(false);
-      })
-      .catch(() => {
-        window.alert("An error occurred while making the request");
-      });
+    try {
+      const {data} = await api.get('getpost/1')
+      setPost(data);
+      setLoading(false)
+    } catch (error) {
+      window.alert("An error occurred while making the request");
+    }
   };
 
   useEffect(() => {
@@ -38,26 +32,29 @@ const App = () => {
     }, 200);
   };
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
+    handleClapAnimation();
+
     if (likesSent >= 50) {
       window.alert("You can only send 50 likes per post!");
       return;
     }
-
-    handleClapAnimation();
     setLikesSent((prev) => prev + 1);
     setPost((prev) => ({
       ...prev,
       likes: prev.likes + 1,
     }));
-    fetch(`${process.env.REACT_APP_API_URL}/like/1`).catch(() => {
+
+    try {
+      await api.get('likepost/1');
+    } catch (error) {
       setLikesSent((prev) => prev - 1);
       setPost((prev) => ({
         ...prev,
         likes: prev.likes - 1,
       }));
       window.alert("An error occurred while making the request");
-    });
+    }
   };
 
   return (
