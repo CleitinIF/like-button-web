@@ -4,12 +4,13 @@
   "private": false,
   "dependencies": {
     "axios": "^0.20.0",
-    "encoding": "^0.1.13",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "^3.0.1"
   },
   "scripts": {
+    "prestart": "react-env",
+    "prebuild": "react-env",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -24,5 +25,7 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {}
+  "devDependencies": {
+    "@beam-australia/react-env": "^2.1.2"
+  }
 }
