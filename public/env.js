@@ -1,0 +1,1 @@
+window._env = {"NODE_ENV":"development","REACT_APP_API_URL":"https://v7erae8ov8.execute-api.sa-east-1.amazonaws.com/dev/"};
